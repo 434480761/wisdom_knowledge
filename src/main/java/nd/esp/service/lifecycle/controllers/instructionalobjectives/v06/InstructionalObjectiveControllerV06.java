@@ -794,7 +794,6 @@ public class InstructionalObjectiveControllerV06 {
         }
         returnTempMap.put("items", itemList);
     }
-
     /**
      * 查询最子套件，及相关信息
      *
@@ -1132,10 +1131,7 @@ public class InstructionalObjectiveControllerV06 {
             for (String key : keySet) {
                 Pattern pattern = Pattern.compile("\\【.+?\\】");
                 String matchKey = pattern.matcher(key).replaceAll("");
-                //转义words字符串中特殊字符
-                String regexWords = CommonHelper.EscapeSpecial(words);
-                String regex = ".*" + regexWords + ".*";
-                if (matchKey.matches(regex)) {
+                if (matchKey.contains(words)) {
                     MultiItemViewModel item = new MultiItemViewModel();
                     item.setTitle(key);
                     item.setGroup(resultMap.get(key));
@@ -1254,7 +1250,9 @@ public class InstructionalObjectiveControllerV06 {
         return resultMulclassifyByDescription;
     }
 
-
+   /*
+    * List中是否有这个id的model
+    */
     public MultilayerClassifySubSuite querylistMultilayerClassifySubSuite(List<MultilayerClassifySubSuite> list, String id) {
 
         for (MultilayerClassifySubSuite multilayerClassifySubSuite : list) {
